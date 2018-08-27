@@ -38,8 +38,16 @@ def blog_subject_all(request):
     return render(request, 'blog/blog_subject_all.html', {'posts': posts})
 
 
+
 def blog_post_all(request):
     # posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     posts = Post.objects.all()
     # posts = SubjectPost.objects.all()
-    return render(request, 'blog/blog_subject_all.html', {'posts': posts})
+    get_menu()
+    return render(request, 'blog/blog_post_all.html', {'posts': posts})
+
+
+def get_menu(request, pk):
+    posts = SubjectPost.objects.all()
+    subject_detail(pk=pk)
+    return render(request, 'blog/base_menu.html', {'menu': posts})

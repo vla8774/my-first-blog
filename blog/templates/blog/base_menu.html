@@ -1,11 +1,10 @@
-{% load static %}
 {% extends 'blog/base.html' %}
 {% block content %}
 <!--МЕНЮ-->
 
    <div class="container">
 
-      <!-- Static navbar -->
+      <!-- Static navbar-->
       <div class="navbar navbar-default" role="navigation">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -19,20 +18,28 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
+
+
+                 {% for post in posts %}
+                <li><a href="{% url 'subject_detail' pk=3 %}">{{ post.subject }}</a></li>
+                {% endfor %}
+
 
             </ul>
 
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+          </div><!--/.nav-collapse-->
+        </div><!--/.container-fluid-->
       </div>
+
 
 
 
     </div> <!-- /container -->
     <!--КОНЕЦ_МЕНЮ-->
+
+
+
+
 {% block menu%}
 {% endblock %}
 {% endblock %}

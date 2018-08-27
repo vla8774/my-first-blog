@@ -128,3 +128,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'file')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # запуск сервера python manage.py runserver
 # остановка сервера CTRL + C
+"""
+$ git status
+[...]
+$ git add --all .
+$ git status
+[...]
+$ git commit -m "Modified templates to display posts from database."
+[...]
+$ git push
+"""
