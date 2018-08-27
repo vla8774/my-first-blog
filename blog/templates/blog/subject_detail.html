@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+
+
+    <div class="post">
+
+
+        <h1>{{ subject.subject}}</h1>
+        <p>{{ subject.about }}</p>
+
+         {% for result in subject.resul.all%}
+        <a href="{% url 'post_detail' pk=result.pk %}">{{ result.title}}</a>
+        <p>{{ result.get_short_text}}<a href="{% url 'post_detail' pk=result.pk %}">...</a> </p>
+
+         {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}

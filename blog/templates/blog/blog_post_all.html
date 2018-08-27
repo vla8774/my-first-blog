@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+
+
+    <div class="post">
+
+ {% for post in posts %}
+       {{ post.subject }}
+    {% endfor %}
+
+
+    </div>
+
+
+
+{% endblock %}
