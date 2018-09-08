@@ -1,28 +1,46 @@
 
 {% load static %}
-<html>
+<!DOCTYPE html>
+<html lang="ru">
     <head>
-        <title>Мой блог!</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <meta name="title" content="Мой блог!{% block title%} {% endblock %}" />
+	    <meta name="description" content="{% block description%} {% endblock %}" />
+	    <meta name="author" content="Кузнецов Владимир Вячеславович - разумный инвестор" />
+        <meta name="yandex-verification" content="" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    {% block header%}
+    {% endblock %}
 
     </head>
-   <body>
-   <!-- <div class="page-header">
-        <h1><a href="/">Мой блог</a></h1>
-    </div>-->
+    <body>
+    <!--МЕНЮ-->
+    <div class="container">
+        <div class="nav-scroller py-4 mb-4">
+            <nav class="nav d-flex justify-content-around">
 
+                <a class="p-4 text-muted" href="">Кто?</a>
+                <a class="p-4 text-muted" href="">Чего?</a>
+                <a class="p-4 text-muted" href="">Зачем?</a>
+                <a class="p-4 text-muted" href="">Суть инвестиций</a>
+              <!--  {% for subject in subjects %}
+                <a class="p-4 text-muted" href="{% url 'subject_detail' url=subject.url %}">{{ subject.title }}</a>
+                {% endfor %}-->
 
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-            {% block content%}
-            {% endblock %}
-            </div>
+                {% block menu%} {% endblock %}
+            </nav>
+            <hr>
         </div>
-    </div>
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-</body>
-</html>
+
+    </div>
+    <!--КОНЕЦ_МЕНЮ-->
+
+    <div class="container">
+    {% block page%} {% endblock %}
+     </div>
+
+    <footer>    {% block footer%} {% endblock %} </footer>
+
+    </body>

@@ -1,14 +1,44 @@
-{% extends 'blog/base_menu.html' %}
+{% extends 'blog/base.html' %}
 
-{% block menu %}
+   {% block page%}
+
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-dark" href="/">Главная</a></li>
+                <li class="breadcrumb-item"><a class="text-dark" href="/subject/">Темы </a></li>
+                <li class="breadcrumb-item"><a class="text-dark" href="{% url 'subject_detail' url=post.get_subject%}">{{post.subject}}</a></li>
+                <li class="breadcrumb-item"><a class="text-dark" href="{% url 'blog_post_subject' subject=post.get_subject%}">Посты</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{post}}</li>
+            </ol>
+    </nav>
+
+   <!-- <nav class="nav">
+        <a class="nav-link active" href="/">Главная </a>
+        <a class="nav-link" href="/subject/">Темы</a>
+        <a class="nav-link" href="{% url 'subject_detail' url=post.get_subject%}">{{post.subject}}</a>
+        <a class="nav-link disabled" href="#">{{post}}</a>
+    </nav>-->
+
     <div class="post">
-        {% if post.published_date %}
-            <div class="date">
-                {{ post.published_date }}
-            </div>
-        {% endif %}
+
+
+        <div class="d-flex flex-row bd-highlight mb-3">
+                <div class="p-2 bd-highlight"><img src="../../../../media/{{post.author.photo }}" width="49" height="49" alt="{{post.author.user}}" class="rounded"></div>
+                <div class="p-2 bd-highlight align-self-center">Автор: {{post.get_user}}.</div>
+                <div class="p-2 bd-highlight align-self-center">
+                    {% if post.published_date %}
+                    <div class="date">
+                        Опубликовано: {{ post.published_date }}.
+                    </div>
+                    {% endif %}
+                </div>
+        </div>
+
+
         <h1>{{ post.title }}</h1>
-        <p>{{ post.text|linebreaksbr }}</p>
+        <p align="justify">{{ post.text|linebreaksbr }}</p>
+       
 
     </div>
+
 {% endblock %}

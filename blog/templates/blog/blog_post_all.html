@@ -1,16 +1,26 @@
-{% extends 'blog/base_menu.html' %}
-{% block menu %}
+{% extends 'blog/base.html' %}
+{% block title%} Привет{% endblock %}
+{% block description%} Это блог будет о том то {% endblock %}
+{% block header %}{% endblock %}
+
+{% block menu%} {% endblock %}
+{% block page%}
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-dark"  href="/">Главная</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Посты</li>
+            </ol>
+    </nav>
 
 
 
+                {% for post in posts %}
+                    <p><h3><a style="text-decoration: none;" class="text-dark" href="{{post.get_absolute_url}}">{{ post.title|upper}}</a></h3></p>
+                    <p align="justify">{{post.get_short_text|truncatewords:69 }}
+                    <a class="text-dark" class="text-dark" href="{{post.get_absolute_url}}">ЧИТАТЬ ПОЛНОСТЬЮ</a></p>
+                 {% endfor %}
 
-    <div class="post">
 
- {% for post in posts %}
-       {{ post.subject }}
-    {% endfor %}
-
-
-    </div>
 
 {% endblock %}
+{% block footer%} {% endblock %}

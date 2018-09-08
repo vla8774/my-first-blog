@@ -1,23 +1,37 @@
 {% extends 'blog/base.html' %}
-{% block content %}
+{% block title%} Привет{% endblock %}
+{% block description%} Это блог будет о том то {% endblock %}
+{% block header %}{% endblock %}
 
-
-
+{% block menu%} {% endblock %}
+{% block page%}
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-dark" href="/">Главная</a></li>
+                <li class="breadcrumb-item"><a class="text-dark" href="/subject/">Темы </a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ subject.title}}</li>
+            </ol>
+    </nav>
 
     <div class="post">
 
 
-        <h1>{{ subject.subject}}</h1>
-        <p>{{ subject.about }}</p>
+        <h1>{{ subject.title}}</h1>
+        <p>{{ subject.description }}</p>
 
          {% for result in subject.resul.all%}
-        <a href="{% url 'post_detail' pk=result.pk %}">{{ result.title}}</a>
-        <p>{{ result.get_short_text}}<a href="{% url 'post_detail' pk=result.pk %}">...</a> </p>
+            <p><h2><a style="text-decoration: none;" class="text-dark" href="{{result.get_absolute_url}}">{{ result.title}}</a></h2></p>
+            <p>{{result.published_date}}</p>
+            <p align="justify">{{result.text|truncatewords:69 }}
+                <a class="text-dark" class="text-dark" href="{{result.get_absolute_url}}">ЧИТАТЬ ПОЛНОСТЬЮ</a>
+            </p>
+
 
          {% endfor %}
 
     </div>
 
 
-
 {% endblock %}
+
+{% block footer%} {% endblock %}

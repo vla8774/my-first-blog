@@ -1,16 +1,38 @@
-{% extends 'blog/base_menu.html' %}
-{% block menu %}
-    {% for post in posts %}
-        <div class="post">
-            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
-             <p>{{ post.get_short_text|linebreaksbr }}<a href="{% url 'post_detail' pk=post.pk %}">...</a></p>
-            <div class="date">
-                {{ post.published_date }}
-            </div>
-            <p><a href="{% url 'subject_detail' pk=post.subject_id %}">{{ post.subject }}</a></p>
+{% extends 'blog/base.html' %}
+{% block title%} Привет{% endblock %}
+{% block description%} Это блог будет о том то {% endblock %}
+{% block header %}{% endblock %}
 
+{% block menu%} {% endblock %}
+{% block page%}
+
+
+
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+                      {% for subject in subjects %}
+          <div class="col-lg-4" >
+
+            <h2>{{ subject.subject }}</h2>
+            <p>{{ subject }}</p>
+
+            <p><a class="btn btn-primary" href="{% url 'subject_detail' url=subject.url %}" role="button">Это я</a></p>
+
+          </div>
+                           {% endfor %}
         </div>
+    {% for post in posts %}
+                <p><h3><a style="text-decoration: none;" class="text-dark" href="{{post.get_absolute_url}}">{{ post.title|upper}}</a></h3></p>
+                <p align="justify">{{post.get_short_text|truncatewords:69 }}
+                <a class="text-dark" href="{{post.get_absolute_url}}">ЧИТАТЬ ПОЛНОСТЬЮ</a></p>
     {% endfor %}
+    </div> <!-- /container -->
 
 
 {% endblock %}
+{% block footer%} {% endblock %}
