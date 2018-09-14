@@ -23,8 +23,8 @@
 
 
         <div class="d-flex flex-row bd-highlight mb-3">
-                <div class="p-2 bd-highlight"><img src="../../../../media/{{post.author.photo }}" width="49" height="49" alt="{{post.author.user}}" class="rounded"></div>
-                <div class="p-2 bd-highlight align-self-center">Автор: {{post.get_user}}.</div>
+              <div class="p-2 bd-highlight"><img src="../../../../media/{{post.author.photo }}" width="49" height="49" alt="{{post.author}}" class="rounded"></div>
+                <div class="p-2 bd-highlight align-self-center">Автор: {{post.author}}.</div>
                 <div class="p-2 bd-highlight align-self-center">
                     {% if post.published_date %}
                     <div class="date">

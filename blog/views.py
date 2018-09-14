@@ -1,7 +1,12 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post, SubjectPost
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic.edit import FormView
+
+
 
 def post_list(request):
     data = {}
@@ -71,3 +76,28 @@ def blog_post_subject(request, subject):
     get_base_menu(data)
     data['subject'] = get_object_or_404(SubjectPost, url=subject)
     return render(request, 'blog/blog_post_subject.html', data)
+
+
+class RegisterFormView(FormView):
+    form_class = UserCreationForm
+    success_url = "/login/"
+    template_name = "blog/register.html"
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterFormView, self).form_valid(form)
+
+
+
+
+class LoginFormView(FormView):
+    form_class = AuthenticationForm
+    template_name = "blog/login.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
+
+    class Meta:
+        model = get_user_model()

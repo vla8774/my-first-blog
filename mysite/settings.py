@@ -99,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
+AUTH_USER_MODEL = 'blog.User'
 
 LANGUAGE_CODE = 'ru-ru'
 

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 
@@ -21,7 +22,7 @@ class SubjectPost(models.Model):
 
 
 class Post(models.Model):
-    author = models.ForeignKey('Profile', on_delete=models.CASCADE)
+    author = models.ForeignKey('User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=250, unique_for_date='published_date', blank=True, null=True)
     subject = models.ForeignKey('SubjectPost', on_delete=models.CASCADE, related_name='resul')
@@ -68,7 +69,7 @@ class Post(models.Model):
                              self.published_date.strftime('%m'),
                              self.published_date.strftime('%d'),
                              self.slug])
-class Profile(models.Model):
+'''class Profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.DO_NOTHING)
     photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
 
@@ -80,9 +81,11 @@ class Profile(models.Model):
 
     class Meta:
         verbose_name = 'Профиль'
-        verbose_name_plural = 'Профили'
+        verbose_name_plural = 'Профили'''''
 
 
+class User(AbstractUser):
+    photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
 # noinspection PyArgumentList,PyCallByClass
 
 
