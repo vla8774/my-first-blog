@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block title%} Привет{% endblock %}
+{% block description%} Это блог будет о том то {% endblock %}
+{% block header %}{% endblock %}
+
+{% block menu%} {% endblock %}
+{% block page%}
+
+
+
+<h2>Регистрация</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Зарегистрироваться</button>
+</form>
+{% endblock %}
+{% block footer%} {% endblock %}

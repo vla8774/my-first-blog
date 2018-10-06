@@ -1,11 +1,13 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.utils import timezone
 from .models import Post, SubjectPost
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic.edit import FormView
+from django.urls import reverse_lazy
+from django.views import generic
 
+from .forms import CustomUserCreationForm
 
 
 def post_list(request):
@@ -13,6 +15,7 @@ def post_list(request):
     get_base_menu(data)
     data['posts'] = Post.objects.filter(status='y', published_date__lte=timezone.now()).order_by('-published_date')[:2]
     return render(request, 'blog/post_list.html', data)
+
 
 '''def post_list(request):
     object_list = Post.objects.filter(status='y')
@@ -43,13 +46,10 @@ def subject_detail(request, url):
     return render(request, 'blog/subject_detail.html', data)
 
 
-def post_detail(request, year, month, day, post):
+def post_detail(request, post):
     data = {}
     get_base_menu(data)
-    data['post'] = get_object_or_404(Post, slug=post,
-                                     published_date__year=year,
-                                     published_date__month=month,
-                                     published_date__day=day)
+    data['post'] = get_object_or_404(Post, slug=post)
     return render(request, 'blog/post_detail.html', data)
 
 
@@ -78,26 +78,7 @@ def blog_post_subject(request, subject):
     return render(request, 'blog/blog_post_subject.html', data)
 
 
-class RegisterFormView(FormView):
-    form_class = UserCreationForm
-    success_url = "/login/"
-    template_name = "blog/register.html"
-
-    def form_valid(self, form):
-        form.save()
-        return super(RegisterFormView, self).form_valid(form)
-
-
-
-
-class LoginFormView(FormView):
-    form_class = AuthenticationForm
-    template_name = "blog/login.html"
-    success_url = "/"
-
-    def form_valid(self, form):
-        login(self.request, self.user)
-        return super(LoginFormView, self).form_valid(form)
-
-    class Meta:
-        model = get_user_model()
+class SignUp(generic.CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'blog/signup.html'

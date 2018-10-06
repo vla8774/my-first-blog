@@ -12,9 +12,9 @@
             </ol>
     </nav>
 
-
     {% for post in subject %}
-            <p><a class="text-dark" href="{% url 'subject_detail' url=post.url %}" > {{ post}}</a></p>
+            <p><a class="text-dark" href="{{ post.get_absolute_url }}" > {{ post}}</a></p>
+
                 <ul>
                 {% for post in post.resul.all %}
                    <li><a class="text-dark" href="{{ post.get_absolute_url }}">{{ post.title}}</a> </li>

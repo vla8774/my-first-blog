@@ -12,25 +12,31 @@
 
 
 
-
     <div class="container">
-        <div class="row">
-                      {% for subject in subjects %}
-          <div class="col-lg-4" >
 
-            <h2>{{ subject.subject }}</h2>
-            <p>{{ subject }}</p>
-
-            <p><a class="btn btn-primary" href="{% url 'subject_detail' url=subject.url %}" role="button">Это я</a></p>
-
-          </div>
-                           {% endfor %}
-        </div>
     {% for post in posts %}
                 <p><h3><a style="text-decoration: none;" class="text-dark" href="{{post.get_absolute_url}}">{{ post.title|upper}}</a></h3></p>
                 <p align="justify">{{post.get_short_text|truncatewords:69 }}
-                <a class="text-dark" href="{{post.get_absolute_url}}">ЧИТАТЬ ПОЛНОСТЬЮ</a></p>
+                <p><a class="btn btn-light" href="{{post.get_absolute_url}}">Читать полностью</a></p>
+        <hr>
     {% endfor %}
+
+        <div class="row">
+                      {% for subject in subjects %}
+          <div class="col-lg-6" >
+            <div class="card">
+            <div class="card-body">
+            <h4><a style="text-decoration: none;" class="text-dark" href="{% url 'subject_detail' url=subject.url %}">{{ subject.title }}</h4></a>
+            <p>{{ subject.description }}</p>
+
+            <p><a class="btn btn-light" href="{% url 'subject_detail' url=subject.url %}" role="button">Все статьи</a></p>
+            </div>
+                </div>
+          </div>
+                           {% endfor %}
+        </div>
+
+    </div>
     </div> <!-- /container -->
 
 

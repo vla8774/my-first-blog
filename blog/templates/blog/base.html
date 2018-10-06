@@ -12,29 +12,46 @@
         <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     {% block header%}
     {% endblock %}
-
+        <style>
+      .container_comment {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+      }
+      .post-footer, .comments {
+        padding: 20px 0;
+      }
+    </style>
     </head>
     <body>
     <!--МЕНЮ-->
-    <div class="container">
-        <div class="nav-scroller py-4 mb-4">
-            <nav class="nav d-flex justify-content-around">
-
-                <a class="p-4 text-muted" href="">Кто?</a>
-                <a class="p-4 text-muted" href="">Чего?</a>
-                <a class="p-4 text-muted" href="">Зачем?</a>
-                <a class="p-4 text-muted" href="">Суть инвестиций</a>
-              <!--  {% for subject in subjects %}
-                <a class="p-4 text-muted" href="{% url 'subject_detail' url=subject.url %}">{{ subject.title }}</a>
-                {% endfor %}-->
-
-                {% block menu%} {% endblock %}
-            </nav>
-            <hr>
-        </div>
+    <div class='container'>
 
 
-    </div>
+
+  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
+       <a style="text-decoration: none;" class="my-0 mr-md-auto font-weight-normal text-dark" href="/"><h5>Российский инвестор</h5></a>
+
+      <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="#">Все статьи</a>
+        <a class="p-2 text-dark" href="#">Кто я?</a>
+        <a class="p-2 text-dark" href="#">Для кого этот блог?</a>
+
+          {% block post_detail_link %} {% endblock %}
+      </nav>
+        {% if user.is_authenticated %}
+
+         Здравствуйте, {{ user.get_username }}<a style="margin: 10px 10px 10px 10px;" class="btn btn-outline-danger " href="{% url 'logout'%}?next={{request.path}}">Выйти</a>
+        {% else %}
+
+        <a class="text-muted" href="{% url 'login'%}?next={{request.path}}">Здравствуйте, читатель!</a> <a style="margin: 10px 10px 10px 10px;" class="btn btn-outline-success" href="{% url 'login'%}?next={{request.path}}">Войти</a>
+        {% endif %}
+
+
+</div>
+{% block content %}{% endblock content %}
+</div>
+
     <!--КОНЕЦ_МЕНЮ-->
 
     <div class="container">

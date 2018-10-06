@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
-
+{% load comments %}
+{% load comments_xtd %}
    {% block page%}
 
     <nav aria-label="breadcrumb">
@@ -40,5 +41,28 @@
        
 
     </div>
+
+
+
+
+{% get_comment_count for post as comment_count %}
+<div class="text-center" style="padding-top:20px">
+
+  &nbsp;&sdot;&nbsp;
+  {{ comment_count }} comments have been posted.
+</div>
+
+<hr/>
+<div class="comments">
+  {% render_comment_list for post %}
+</div>
+
+
+<div class="comment">
+  <h4 class="text-center">Your comment</h4>
+  <div class="well">
+    {% render_comment_form for post %}
+  </div>
+</div>
 
 {% endblock %}

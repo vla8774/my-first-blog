@@ -15,6 +15,9 @@ class SubjectPost(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('subject_detail', kwargs={'url': self.url})
+
     def save(self, *args, **kwargs):
         url = translit(self.title, 'ru', reversed=True)
         self.url = url.replace(" ", "_")
@@ -65,10 +68,7 @@ class Post(models.Model):
     @property
     def get_absolute_url(self):
         return reverse('post_detail',
-                       args=[self.published_date.year,
-                             self.published_date.strftime('%m'),
-                             self.published_date.strftime('%d'),
-                             self.slug])
+                       args=[self.slug])
 '''class Profile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.DO_NOTHING)
     photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
@@ -85,8 +85,11 @@ class Post(models.Model):
 
 
 class User(AbstractUser):
+    # add additional fields in here
     photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
-# noinspection PyArgumentList,PyCallByClass
+
+    def __str__(self):
+        return self.email
 
 
 """class TypesFiles(models.Model):

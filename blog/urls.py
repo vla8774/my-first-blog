@@ -1,4 +1,5 @@
 from django.conf.urls import url
+from django.urls import include
 
 from mysite import settings
 from . import views
@@ -15,16 +16,16 @@ urlpatterns = [
     url(r'^post/(?P<subject>.+)/$',  views.blog_post_subject, name='blog_post_subject'),
     #url(r'^subject/(?P<url>\.+)/(?P<url_post>.+)/$', views.post_detail, name='post_detail'),
     #url(r'^post/(?P<url_post>.+)/$', views.post_detail, name='post_detail'),
-    url(r'^(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<post>[-\w]+)/$',
+
+    url(r'^(?P<post>[-\w]+)/$',
         views.post_detail,
         name='post_detail'),
-    url(r'^register/$', views.RegisterFormView.as_view()),
-    url(r'^login/$', views.LoginFormView.as_view()),
-
-
-
-
+    url(r'signup/', views.SignUp.as_view(), name='signup'),
 ]
+
+'''urlpatterns += [
+    url(r'^accounts/', include('django.contrib.auth.urls')),
+]'''
 
 urlpatterns += staticfiles_urlpatterns()
 
