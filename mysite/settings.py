@@ -142,7 +142,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 COMMENTS_APP = 'django_comments_xtd'
 
 # Either enable sending mail messages to the console:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Or set up the EMAIL_* settings so that Django can send emails:
 EMAIL_HOST = "smtp.mail.com"
@@ -161,3 +161,4 @@ COMMENTS_XTD_FROM_EMAIL = "noreply@example.com"
 # Contact mail address to show in messages.
 COMMENTS_XTD_CONTACT_EMAIL = "helpdesk@example.com"
 COMMENTS_XTD_CONFIRM_EMAIL = False
+COMMENTS_XTD_MAX_THREAD_LEVEL = 1

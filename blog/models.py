@@ -89,8 +89,7 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to='user/%Y/%m/%d', blank=True)
 
     def __str__(self):
-        return self.email
-
+        return self.username
 
 """class TypesFiles(models.Model):
     tf = models.CharField(max_length=200)
